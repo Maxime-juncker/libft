@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/10/24 21:40:15 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/10/25 10:14:57 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,6 @@ fclean: clean
 
 .PHONY: re
 re: fclean all
-
-.PHONY: so
-so:
-	$(CC) -fPIC $(CFLAGS) $(SRCS)
-	gcc -shared -o libft.so $(OBJ)
 
 .PHONY: debug
 debug: clean
