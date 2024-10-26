@@ -6,32 +6,27 @@
 /*   By: mjuncker <mjuncker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:57:33 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/10/24 17:57:46 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/10/26 11:50:32 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// \0 included in dsize, (Hello world > 11 char but dsize = 12)
+// dsize include space for the null terminator
 size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 {
-	size_t	y;
 	size_t	i;
+	size_t	len;
 
-	if (dsize == 0)
-		return (0);
-	if (ft_strlen(dst) > dsize)
+	len = ft_strlen(dst);
+	i = len;
+	if (dsize < len || dsize == 0)
 		return (dsize + ft_strlen(src));
-	i = 0;
-	y = 0;
-	while (dst[y] && y < dsize)
-		y++;
-	while (src[i] && y < dsize - 1)
+	while (i < dsize - 1 && src[i - len])
 	{
-		dst[y] = src[i];
-		y++;
+		dst[i] = src[i - len];
 		i++;
 	}
-	dst[y] = '\0';
-	return (ft_strlen(src) + (y - i));
+	dst[i] = '\0';
+	return (len + ft_strlen(src));
 }

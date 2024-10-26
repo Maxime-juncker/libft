@@ -1,2 +1,5 @@
 .vscode/
 libft-war-machine/
+log
+a.out
+*.o

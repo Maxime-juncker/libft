@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:59:47 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/10/24 17:59:48 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:50:06 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	sub = malloc(len + 1);
-	if (sub == NULL || len == 0)
-		return (NULL);
-	if (start >= ft_strlen(s))
+	if (start >= ft_strlen(s) || sub == NULL || len == 0)
 	{
 		sub[0] = '\0';
 		return (sub);

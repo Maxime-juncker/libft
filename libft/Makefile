@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/10/25 10:14:57 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/10/26 15:17:27 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =  ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 		ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 		ft_striteri.c
+BSRCS = ft_lstnew_bonus.c
 
 
 OBJ = $(SRCS:.c=.o)
@@ -31,7 +32,12 @@ all : $(NAME) clean
 
 $(NAME):
 	$(CC) $(CFLAGS) $(SRCS)
-	ar rcs $(NAME) $(OBJ) 
+	ar rcs $(NAME) $(OBJ)
+
+.PHONY: bonus
+bonus:
+	$(CC) $(CFLAGS) $(SRCS) $(BSRCS)
+	ar rcs $(NAME) $(OBJ)
 
 .PHONY: clean
 clean:
@@ -46,6 +52,6 @@ re: fclean all
 
 .PHONY: debug
 debug: clean
-	$(CC) $(CFLAGG) $(SRCS) test.c -o a.out
+	$(CC) $(CFLAGG) $(SRCS) main.c -o a.out
 	./a.out
 
