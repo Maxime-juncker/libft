@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/10/26 17:51:59 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/10/27 16:12:07 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS =  ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 		ft_striteri.c
 BSRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
-		ft_lstdelone.c ft_lstclear.c
+		ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 
 OBJ = $(SRCS:.c=.o)
