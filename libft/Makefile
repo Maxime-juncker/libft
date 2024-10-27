@@ -6,13 +6,13 @@
 #    By: mjuncker <mjuncker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/10/26 15:17:27 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/10/26 17:51:59 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGG = -Wall -Werror -Wextra -g3
-CFLAGS = -Wall -Werror -Wextra -c
+CFLAGG = -g3
+CFLAGS = -Wall -Werror -Wextra
 SRCS =  ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 		ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c \
 		ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c \
@@ -21,27 +21,27 @@ SRCS =  ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 		ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 		ft_striteri.c
-BSRCS = ft_lstnew_bonus.c
+BSRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
+		ft_lstdelone.c ft_lstclear.c
 
 
 OBJ = $(SRCS:.c=.o)
+BOBJ = $(BSRCS:.c=.o)
 NAME = libft.a
 
 .PHONY: all
-all : $(NAME) clean
+all : $(NAME)
 
-$(NAME):
-	$(CC) $(CFLAGS) $(SRCS)
+$(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 .PHONY: bonus
-bonus:
-	$(CC) $(CFLAGS) $(SRCS) $(BSRCS)
-	ar rcs $(NAME) $(OBJ)
+bonus: fclean $(OBJ) $(BOBJ)
+	ar rcs $(NAME) $(OBJ) $(BOBJ)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(BOBJ)
 
 .PHONY: fclean
 fclean: clean
@@ -54,4 +54,9 @@ re: fclean all
 debug: clean
 	$(CC) $(CFLAGG) $(SRCS) main.c -o a.out
 	./a.out
+
+.PHONY: bdebug
+bdebug: clean
+	$(CC) $(CFLAGG) $(SRCS) $(BSRCS) main.c -o a.out
+
 
