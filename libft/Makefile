@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mjuncker <mjuncker@student.42.fr>          +#+  +:+       +#+         #
+#    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/10/27 16:12:07 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/03 16:01:21 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,12 +51,7 @@ fclean: clean
 re: fclean all
 
 .PHONY: debug
-debug: clean
-	$(CC) $(CFLAGG) $(SRCS) main.c -o a.out
-	./a.out
-
-.PHONY: bdebug
-bdebug: clean
-	$(CC) $(CFLAGG) $(SRCS) $(BSRCS) main.c -o a.out
+debug: clean $(OBJ) $(BOBJ)
+	$(CC) $(CFLAGG) $(OBJ) $(BOBJ) main.c -o a.out
 
 
