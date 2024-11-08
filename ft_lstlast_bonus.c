@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:56:58 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/02 19:13:31 by mjuncker         ###   ########.fr       */
+/*   Created: 2024/10/26 15:42:30 by mjuncker          #+#    #+#             */
+/*   Updated: 2024/11/07 16:40:57 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*ft_lstlast(t_list *lst)
 {
-	char	*result;
-	size_t	len1;
-	size_t	len2;
-
-	len1 = ft_strlen(s1) + 1;
-	len2 = ft_strlen(s2) + 1;
-	result = malloc(len1 + len2 + 1);
-	if (result == NULL)
+	if (lst == NULL)
 		return (NULL);
-	ft_strlcpy(result, s1, len1);
-	ft_strlcpy(result + len1 - 1, s2, len2);
-	return (result);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }

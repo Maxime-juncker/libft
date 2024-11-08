@@ -1,48 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 17:47:08 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/02 19:13:18 by mjuncker         ###   ########.fr       */
+/*   Created: 2024/10/24 17:56:58 by mjuncker          #+#    #+#             */
+/*   Updated: 2024/11/06 18:13:17 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	in_set(char const c, char const *set)
-{
-	size_t	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (c == set[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*result;
-	size_t	len;
-	size_t	i;
+	size_t	len1;
+	size_t	len2;
 
-	len = ft_strlen(s1) - 1;
-	i = 0;
-	while (in_set(s1[i], set))
-		i++;
-	if (i - 1 == len)
-		return ("");
-	while (in_set(s1[len], set))
-		len--;
-	result = malloc(len - i + 2);
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	if (s1 == NULL)
+		return ((char *)s2);
+	if (s2 == NULL)
+		return ((char *)s1);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = malloc(len1 + len2 + 1);
 	if (result == NULL)
 		return (NULL);
-	ft_strlcpy(result, s1 + i, len - i + 2);
+	ft_strlcpy(result, s1, len1 + 1);
+	ft_strlcpy(result + len1, s2, len2 + 1);
 	return (result);
 }

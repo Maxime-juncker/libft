@@ -6,13 +6,13 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:04:13 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/02 19:14:04 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:33:56 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	get_nb_len(int n)
+static size_t	get_nb_len(int n)
 {
 	size_t		i;
 	long int	nb;

@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 17:28:28 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/02 19:14:08 by mjuncker         ###   ########.fr       */
+/*   Created: 2024/10/24 17:58:17 by mjuncker          #+#    #+#             */
+/*   Updated: 2024/11/06 16:40:15 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1024);
-	return (0);
+	int	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

@@ -1,5 +1,6 @@
-.vscode/
-libft-war-machine/
-log
-a.out
+*.out
 *.o
+*.a
+.vscode
+.vscode/
+main.c

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 12:46:18 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/02 19:13:26 by mjuncker         ###   ########.fr       */
+/*   Created: 2024/10/10 17:28:38 by mjuncker          #+#    #+#             */
+/*   Updated: 2024/11/07 08:14:54 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+// PS: c % 256 because we compare an int to a char (biggest char=256)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char	*res;
 	size_t	i;
 
-	res = malloc(ft_strlen(s) + 1);
-	if (res == NULL)
-		return (NULL);
 	i = 0;
-	while (s[i])
+	while (i < n)
 	{
-		res[i] = f(i, s[i]);
+		if (ft_memcmp(s, (void *)(&c), 1) == 0)
+			return ((void *)s);
+		s++;
 		i++;
 	}
-	res[i] = '\0';
-	return (res);
+	return (NULL);
 }
