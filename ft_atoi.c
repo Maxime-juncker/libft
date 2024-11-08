@@ -6,11 +6,22 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:28:20 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/02 19:12:50 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:48:34 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	check_overflow(long n, int sign)
+{
+	if (n * 10 / 10 != n)
+	{
+		if (sign < 0)
+			return (0);
+		return (-1);
+	}
+	return (2);
+}
 
 int	ft_atoi(const char *nptr)
 {
@@ -31,6 +42,8 @@ int	ft_atoi(const char *nptr)
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
+		if (check_overflow(n, sign) != 2)
+			return (check_overflow(n, sign));
 		n *= 10;
 		n += nptr[i] - '0';
 		i++;

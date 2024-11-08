@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/07 17:52:55 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/08 12:38:10 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,10 +63,13 @@ BOBJ = $(BSRCS:.c=.o)
 NAME = libft.a
 
 .PHONY: all
-all : $(NAME) Makefile
+all : $(NAME)
 
-$(NAME): $(OBJ) libft.h
+$(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
+
+%.o : %.c libft.h Makefile
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 .PHONY: bonus
 bonus: $(OBJ) $(BOBJ)
