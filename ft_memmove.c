@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:47:31 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/06 09:46:37 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/09 10:11:37 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t			i;
 	unsigned char	*cdest;
 	unsigned char	*csrc;
 
@@ -22,7 +21,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		return (NULL);
 	cdest = (unsigned char *)dest;
 	csrc = (unsigned char *)src;
-	i = 0;
 	if (cdest < csrc)
 		ft_memcpy(dest, src, n);
 	else
