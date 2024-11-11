@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/09 14:44:57 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/11 13:40:50 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ all : $(NAME)
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-%.o : %.c libft.h Makefile
+%.o : %.c libft.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 .PHONY: bonus
