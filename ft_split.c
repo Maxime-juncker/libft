@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:42:45 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/07 15:48:11 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:10:40 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	y;
 
-	i = 0;
+	if (!s)
+		return (NULL);
 	y = 0;
 	result = malloc((get_nb_split(s, c) + 1) * sizeof(char *));
 	if (!result || !s)
@@ -97,6 +98,5 @@ char	**ft_split(char const *s, char c)
 			result[y][i++] = s++[0];
 		result[y++][i] = '\0';
 	}
-	result[y] = NULL;
-	return (result);
+	return ((result[y] = NULL), result);
 }
