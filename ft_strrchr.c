@@ -6,13 +6,12 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:58:59 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/06 17:05:12 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:29:12 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// PS: c % 256 because we compare an int to a char (biggest char=256)
 char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
