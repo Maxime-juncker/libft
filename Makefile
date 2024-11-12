@@ -6,12 +6,11 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/11 13:40:50 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/12 16:39:46 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGG = -g3
 CFLAGS = -Wall -Werror -Wextra
 SRCS =  ft_isalpha.c 			\
 		ft_isdigit.c 			\
@@ -88,6 +87,4 @@ re: fclean all
 
 .PHONY: debug
 debug: $(OBJ) $(BOBJ)
-	$(CC) $(CFLAGG) $(OBJ) $(BOBJ) main.c -o a.out
-
-
+	$(CC) $(CFLAGS) $(OBJ) $(BOBJ) main.c -o a.out
