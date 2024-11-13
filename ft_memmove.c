@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:47:31 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/09 10:11:37 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:52:46 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	unsigned char	*cdest;
 	unsigned char	*csrc;
 
-	if (dest == NULL && src == NULL)
+	if (dest == NULL && src == NULL && n == 0)
 		return (NULL);
 	cdest = (unsigned char *)dest;
 	csrc = (unsigned char *)src;

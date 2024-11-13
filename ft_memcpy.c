@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:28:43 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/03 16:56:18 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:50:14 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
-	if (dest == NULL && src == NULL)
+	if (dest == NULL && src == NULL && n == 0)
 		return (NULL);
 	i = 0;
 	while (i < n)
