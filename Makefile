@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/16 10:50:02 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/16 13:14:31 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ SRCS := $(addprefix $(SRCS_D), $(SRCS))
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D)
+CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D) -fPIC
 
 # commands
 RM = rm -fr
@@ -78,11 +78,17 @@ RM = rm -fr
 .PHONY: all
 all : $(NAME)
 
+.PHONY: so
+so: $(OBJ)
+	$(CC) $(CFLAGS) -shared -o $(BIN_D)libft.so $(OBJ)
+
+
 $(NAME): $(OBJ) | $(BIN_D)
 	ar rcs $(BIN_D)$(NAME) $(OBJ)
 
-$(OBJ): $(SRCS) | $(OBJ_D)
+$(OBJ_D)%.o: $(SRCS_D)%.c | $(OBJ_D)
 	$(CC) $(CFLAGS) -c $< -o $@
+
 
 $(OBJ_D):
 	mkdir -p $(OBJ_D)
