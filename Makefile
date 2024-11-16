@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/16 10:07:41 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/16 10:23:51 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ all : $(NAME)
 $(NAME): $(OBJ) | $(BIN_D)
 	ar rcs $(BIN_D)$(NAME) $(OBJ)
 
-$(OBJ_D)%.o: $(SRCS_D)%.c | $(OBJ_D)
+$(OBJ): $(SRCS) | $(OBJ_D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_D):
