@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 18:00:24 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/02 19:13:12 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/16 09:49:08 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,10 @@ int	ft_toupper(int c)
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);
 	return (c);
+}
+
+
+int	main(void)
+{
+	ft_putendl_fd("Hello world", 1);
 }

@@ -6,12 +6,19 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/12 16:39:46 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/16 10:07:41 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Werror -Wextra
+NAME = libft.a
+
+# paths
+OBJ_D		= obj/
+SRCS_D		= src/
+BIN_D		= bin/
+INCLUDES_D	= includes/
+
+# src file names
 SRCS =  ft_isalpha.c 			\
 		ft_isdigit.c 			\
 		ft_isalnum.c 			\
@@ -45,8 +52,7 @@ SRCS =  ft_isalpha.c 			\
 		ft_putstr_fd.c 			\
 		ft_putendl_fd.c 		\
 		ft_putnbr_fd.c 			\
-		ft_striteri.c
-BSRCS = ft_lstnew_bonus.c 		\
+		ft_striteri.c			\
 		ft_lstadd_front_bonus.c \
 		ft_lstsize_bonus.c 		\
 		ft_lstlast_bonus.c 		\
@@ -54,37 +60,45 @@ BSRCS = ft_lstnew_bonus.c 		\
 		ft_lstdelone_bonus.c 	\
 		ft_lstclear_bonus.c 	\
 		ft_lstiter_bonus.c 		\
-		ft_lstmap_bonus.c
-
+		ft_lstmap_bonus.c		\
 
 OBJ = $(SRCS:.c=.o)
-BOBJ = $(BSRCS:.c=.o)
-NAME = libft.a
+
+# adding path for src and obj
+OBJ := $(addprefix $(OBJ_D), $(OBJ))
+SRCS := $(addprefix $(SRCS_D), $(SRCS))
+
+# compiler settings
+CC = cc
+CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D)
+
+# commands
+RM = rm -fr
 
 .PHONY: all
 all : $(NAME)
 
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+$(NAME): $(OBJ) | $(BIN_D)
+	ar rcs $(BIN_D)$(NAME) $(OBJ)
 
-%.o : %.c libft.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+$(OBJ_D)%.o: $(SRCS_D)%.c | $(OBJ_D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: bonus
-bonus: $(OBJ) $(BOBJ)
-	ar rcs $(NAME) $(OBJ) $(BOBJ)
+$(OBJ_D):
+	mkdir -p $(OBJ_D)
+
+$(BIN_D):
+	mkdir -p $(BIN_D)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJ) $(BOBJ)
+	$(RM) $(OBJ)
 
 .PHONY: fclean
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(BIN_D)$(NAME)
 
 .PHONY: re
-re: fclean all
-
-.PHONY: debug
-debug: $(OBJ) $(BOBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(BOBJ) main.c -o a.out
+re:
+	$(MAKE) fclean
+	$(MAKE) all
