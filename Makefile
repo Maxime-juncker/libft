@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/16 13:14:31 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/16 13:20:45 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(BIN_D)$(NAME)
+	$(RM) $(BIN_D)libft.so
 
 .PHONY: re
 re:
