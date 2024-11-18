@@ -6,30 +6,45 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:26:23 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/06 17:07:31 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:28:50 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int n, int fd)
 {
-	if (n == MIN_INT)
+	char	*nb;
+	int		len;
+
+	nb = ft_itoa(n);
+	len = ft_strlen(nb);
+	while (len > 0)
 	{
-		ft_putstr_fd("-2147483648", fd);
-		return ;
+		ft_putchar_fd(nb[ft_strlen(nb) - len], fd);
+		len--;
 	}
-	if (n < 0)
+	return (ft_strlen(nb));
+}
+
+void	ft_putnbr_hex(unsigned long int nbr, char *base, int fd, int *count)
+{
+	if (nbr / 16 > 0)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putnbr_fd(n * -1, fd);
-		return ;
-	}
-	if (n / 10 > 0)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putchar_fd((n % 10) + '0', fd);
+		ft_putnbr_hex(nbr / 16, base, fd, count);
+		(*count)++;
+		ft_putnbr_hex((nbr % 16), base, fd, count);
 	}
 	else
-		ft_putchar_fd(n + '0', fd);
+		ft_putchar_fd(base[nbr], fd);
+}
+
+int	ft_putaddr(long int nbr, char *base, int fd)
+{
+	int	count;
+
+	count = 2;
+	ft_putstr_fd("0x", 1);
+	ft_putnbr_hex(nbr, base, fd, &count);
+	return (count);
 }
