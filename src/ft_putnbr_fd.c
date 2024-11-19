@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:26:23 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/19 12:22:08 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:30:56 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ void	ft_putnbr_hex(unsigned long int nbr, char *base, int fd, int *count)
 	if (nbr / 16 > 0)
 	{
 		ft_putnbr_hex(nbr / 16, base, fd, count);
-		(*count)++;
 		ft_putnbr_hex((nbr % 16), base, fd, count);
 	}
 	else
+	{
+		(*count)++;
 		ft_putchar_fd(base[nbr], fd);
+	}
 }
 
 int	ft_putaddr(long int nbr, char *base, int fd)
