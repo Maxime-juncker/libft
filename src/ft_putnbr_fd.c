@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:26:23 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/18 17:28:50 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:22:08 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd(nb[ft_strlen(nb) - len], fd);
 		len--;
 	}
-	return (ft_strlen(nb));
+	len = ft_strlen(nb);
+	free(nb);
+	return (len);
 }
 
 void	ft_putnbr_hex(unsigned long int nbr, char *base, int fd, int *count)
