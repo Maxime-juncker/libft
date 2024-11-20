@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:26:23 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/19 15:30:56 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/20 08:57:51 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,31 @@ int	ft_putnbr_fd(int n, int fd)
 	return (len);
 }
 
-void	ft_putnbr_hex(unsigned long int nbr, char *base, int fd, int *count)
+int	ft_putnbr_hex(unsigned long int nbr, char *base, int fd)
 {
-	if (nbr / 16 > 0)
+	char	buffer[16];
+	int		i;
+	int		count;
+
+	if (nbr == 0)
+		return (ft_putchar_fd('0', fd));
+	i = 0;
+	count = 0;
+	while (nbr > 0)
 	{
-		ft_putnbr_hex(nbr / 16, base, fd, count);
-		ft_putnbr_hex((nbr % 16), base, fd, count);
+		buffer[i++] = base[nbr % 16];
+		nbr /= 16;
 	}
-	else
+	while (i > 0)
 	{
-		(*count)++;
-		ft_putchar_fd(base[nbr], fd);
+		ft_putchar_fd(buffer[--i], fd);
+		count++;
 	}
+	return (count);
 }
 
 int	ft_putaddr(long int nbr, char *base, int fd)
 {
-	int	count;
-
-	count = 2;
 	ft_putstr_fd("0x", 1);
-	ft_putnbr_hex(nbr, base, fd, &count);
-	return (count);
+	return (ft_putnbr_hex(nbr, base, fd) + 2);
 }
