@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:28:22 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/06 16:40:32 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:02:23 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
 
+	if (s == NULL)
+		return ;
 	i = 0;
 	while (i < n)
 	{

@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:57:33 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/06 10:26:04 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:31:15 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 	size_t	i;
 	size_t	len;
 
+	if (src == NULL)
+		return (0);
 	len = ft_strlen(dst);
 	i = len;
 	if (dsize < len || dsize == 0)
