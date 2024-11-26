@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:15:36 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/26 09:58:50 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:15:44 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	ft_printf(const char *s, ...)
 	va_list			ptr;
 	char			*block;
 
+	if (s == NULL)
+		return (-1);
 	nb_write = 0;
 	va_start(ptr, s);
 	while (*s)
