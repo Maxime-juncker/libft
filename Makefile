@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/26 09:57:39 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/26 13:49:45 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,36 +77,51 @@ CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D)
 # commands
 RM = rm -fr
 
-.PHONY: all
-all : $(NAME)
+# colors
+RED = \033[31m
+GREEN = \033[32m
+YELLOW = \033[33m
+RESET = \033[0m
+BLUE = \033[34m
 
-$(NAME): $(OBJ) | $(BIN_D)
-	ar rcs $(BIN_D)$(NAME) $(OBJ)
+.PHONY: all
+all : $(BIN_D)$(NAME)
+
+$(BIN_D)$(NAME): $(OBJ) | $(BIN_D)
+	@echo "$(GREEN)[LINKING]: $(NAME)$(RESET)"
+	@ar rcs $(BIN_D)$(NAME) $(OBJ)
+	@echo "$(GREEN)[SUCCESS]$(RESET)"
+
 
 $(OBJ_D)%.o: $(SRCS_D)%.c | $(OBJ_D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(BLUE)[COMPILING]: $@$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 
 $(OBJ_D):
-	mkdir -p $(OBJ_D)
+	@echo "$(YELLOW)[CREATING]: $(OBJ_D)$(RESET)"
+	@mkdir -p $(OBJ_D)
 
 $(BIN_D):
-	mkdir -p $(BIN_D)
+	@echo "$(YELLOW)[CREATING]: $(BIN_D)$(RESET)"
+	@mkdir -p $(BIN_D)
 
 .PHONY: clean
 clean:
-	$(RM) $(OBJ)
+	@echo "$(RED)[CLEAN]: obj files$(RESET)"
+	@$(RM) $(OBJ)
 
 .PHONY: fclean
 fclean: clean
-	$(RM) $(BIN_D)$(NAME)
-	$(RM) $(BIN_D)a.out
-	$(RM) $(BIN_D)libft.so
+	@echo "$(RED)[CLEAN]: binaries$(RESET)"
+	@$(RM) $(BIN_D)$(NAME)
+	@$(RM) $(BIN_D)a.out
+	@$(RM) $(BIN_D)libft.so
 
 .PHONY: re
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 debug:
 	$(CFLAGS) += -g3
