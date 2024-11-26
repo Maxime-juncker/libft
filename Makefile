@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/11/20 15:27:35 by mjuncker         ###   ########.fr        #
+#    Updated: 2024/11/26 09:57:39 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRCS =  ft_isalpha.c 			\
 		ft_lstiter_bonus.c 		\
 		ft_lstmap_bonus.c		\
 		ft_get_next_line.c		\
+		ft_printf.c				\
 
 OBJ = $(SRCS:.c=.o)
 
@@ -78,12 +79,6 @@ RM = rm -fr
 
 .PHONY: all
 all : $(NAME)
-
-.PHONY: so
-so: clean
-	$(MAKE) CFLAGS="$(CFLAGS) -fPIC" $(OBJ)
-	$(CC) $(CFLAGS) -shared -o $(BIN_D)libft.so $(OBJ)
-
 
 $(NAME): $(OBJ) | $(BIN_D)
 	ar rcs $(BIN_D)$(NAME) $(OBJ)
@@ -115,7 +110,7 @@ re:
 
 debug:
 	$(CFLAGS) += -g3
-	$(CC) $(CFLAGS) $(SRCS) -o $(BIN_D)a.out 
+	$(CC) $(CFLAGS) $(SRCS) -o $(BIN_D)a.out
 
 run: debug
 	$(BIN_D)a.out
