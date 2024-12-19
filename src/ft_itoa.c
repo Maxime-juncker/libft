@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:04:13 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/18 17:03:17 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:15:59 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static size_t	uget_nb_len(unsigned int n)
 	return (i);
 }
 
-char	*u_ft_itoa(unsigned int n)
+char	*ft_uitoa(unsigned int n)
 {
 	unsigned long int	nb;
 	char				*res;

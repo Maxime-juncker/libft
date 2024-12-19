@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:15:36 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/26 12:15:44 by mjuncker         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:15:59 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	handle_stop(const char *type, va_list *ptr)
 		return (ft_putnbr_fd(va_arg(*ptr, int), 1));
 	else if (*type == 'u')
 	{
-		tmp = (char *)u_ft_itoa(va_arg(*ptr, unsigned int));
+		tmp = (char *)ft_uitoa(va_arg(*ptr, unsigned int));
 		ft_putstr_fd(tmp, 1);
 		len = ft_strlen(tmp);
 		free(tmp);
