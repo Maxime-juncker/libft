@@ -6,115 +6,105 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 08:23:03 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/11/20 15:31:03 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:07:16 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	break_pos(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL || s[0] == 0)
-		return (-1);
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-static void	*cleanup(char **buffer, char **line)
-{
-	if (buffer && *buffer)
-	{
-		free(*buffer);
-		*buffer = NULL;
-	}
-	if (line && *line)
-	{
-		free(*line);
-		*line = NULL;
-	}
-	return (NULL);
-}
-
-static char	*dump_buffer(char **buffer, char **line)
+static int	full_dump(char *buffer, char **line)
 {
 	char	*new;
-	size_t	line_size;
 
-	line_size = ft_strlen(*line) + 1;
-	if (break_pos(*buffer) != -1)
+	new = ft_strjoin(*line, buffer);
+	if (new == NULL)
 	{
-		new = malloc(line_size + break_pos(*buffer) + 1);
-		if (!new)
-			return (cleanup(buffer, line));
-		ft_bzero(new, break_pos(*buffer) + 2);
-		ft_strlcat(new, *line, line_size + break_pos(*buffer) + 1);
-		ft_strlcat(new, *buffer, line_size + break_pos(*buffer) + 1);
-		ft_memmove(*buffer, *buffer + break_pos(*buffer) + 1, BUFFER_SIZE);
-		cleanup(NULL, line);
-		return (new);
-	}
-	new = malloc(line_size + BUFFER_SIZE);
-	if (!new)
-		return (cleanup(buffer, line));
-	ft_bzero(new, break_pos(*buffer) + 2);
-	ft_strlcat(new, *line, line_size + BUFFER_SIZE);
-	ft_strlcat(new, *buffer, line_size + BUFFER_SIZE);
-	ft_bzero(*buffer, BUFFER_SIZE);
-	cleanup(NULL, line);
-	return (new);
-}
-
-// return -1 (an error) return 1 if \n found return 0 if nothing
-// allocate buffer if buffer null
-static int	setup_buffer(char **buffer, char **line)
-{
-	*line = NULL;
-	if (!*buffer)
-	{
-		*buffer = malloc(BUFFER_SIZE + 1);
-		ft_bzero(*buffer, BUFFER_SIZE + 1);
-	}
-	if (!*buffer)
+		if (*line != NULL)
+			free(*line);
 		return (-1);
-	*line = dump_buffer(buffer, line);
-	if (break_pos(*line) != -1)
-		return (1);
+	}
+	if (*line != NULL)
+		free(*line);
+	*line = new;
+	ft_bzero(buffer, ft_strlen(buffer));
 	return (0);
 }
 
+static int	dump_buffer(char *buffer, char **line)
+{
+	char	*new;
+	int		len;
+
+	new = 0x0;
+	if (buffer[0])
+	{
+		if (ft_strchr(buffer, '\n') != NULL)
+		{
+			len = ft_strlen(*line) + ft_strchr(buffer, '\n') - buffer + 2;
+			new = ft_calloc(len, sizeof(char));
+			if (new == NULL)
+				return (-1);
+			if (*line)
+				ft_strlcpy(new, *line, len);
+			ft_strlcat(new, buffer, len);
+			ft_memmove(buffer, buffer + (ft_strchr(buffer, '\n') - buffer + 1),
+				BUFFER_SIZE);
+			if (*line)
+				free(*line);
+			*line = new;
+			return (1);
+		}
+		return (full_dump(buffer, line));
+	}
+	return (1);
+}
+
+static int	read_line(int fd, char *buffer, char **line)
+{
+	int	nb_read;
+
+	nb_read = read(fd, buffer, BUFFER_SIZE);
+	if (nb_read == -1)
+	{
+		if (*line != NULL)
+			free(*line);
+		return (-1);
+	}
+	return (nb_read);
+}
+
+/*
+ * @brief get next line will return the next line of the given file
+ * @brief or null if an error occure of the file is already read
+ * @param fd the file descriptor to read the file
+ * @return the next line or null
+ * @note the user is responsible for managing the return value
+*/
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	buffer[BUFFER_SIZE];
 	char		*line;
 	int			nb_read;
+	int			code;
 
-	if (fd <= -1)
+	line = 0x0;
+	nb_read = 0;
+	if (fd < 0)
 		return (NULL);
-	if (setup_buffer(&buffer, &line) != 0)
+	if (dump_buffer(buffer, &line) == -1)
+		return (NULL);
+	while (nb_read != -1)
 	{
-		if (!buffer || !line)
-			return (NULL);
-		return (line);
-	}
-	nb_read = -1;
-	while (nb_read != 0)
-	{
-		nb_read = read(fd, buffer, BUFFER_SIZE);
-		line = dump_buffer(&buffer, &line);
-		if ((nb_read == 0 && line[0] == 0) || !buffer || !line)
-			return (cleanup(&buffer, &line));
-		if (break_pos(line) != -1 || (nb_read == 0))
-			return (line);
+		nb_read = read_line(fd, buffer, &line);
 		if (nb_read == -1)
-			return (cleanup(&buffer, &line));
+			return (NULL);
+		if (nb_read == 0)
+			return (line);
+		code = dump_buffer(buffer, &line);
+		if (code == -1)
+			return (NULL);
+		if (code == 1 || nb_read != BUFFER_SIZE)
+			return (line);
 	}
-	return (cleanup(&buffer, &line));
+	return (NULL);
 }

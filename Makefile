@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2024/12/19 12:17:37 by mjuncker         ###   ########.fr        #
+#    Updated: 2025/01/05 11:54:56 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,8 @@ SRCS := $(addprefix $(SRCS_D), $(SRCS))
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D)
+CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=4
+MAKEFLAGS += -s
 
 # commands
 RM = rm -fr
@@ -88,44 +89,44 @@ BLUE = \033[34m
 all : $(BIN_D)$(NAME)
 
 $(BIN_D)$(NAME): $(OBJ) | $(BIN_D)
-	@echo "$(GREEN)[LINKING]: $(NAME)$(RESET)"
-	@ar rcs $(BIN_D)$(NAME) $(OBJ)
-	@echo "$(GREEN)[SUCCESS]$(RESET)"
+	echo "$(GREEN)[LINKING]: $(NAME)$(RESET)"
+	ar rcs $(BIN_D)$(NAME) $(OBJ)
+	echo "$(GREEN)[SUCCESS]$(RESET)"
 
 
-$(OBJ_D)%.o: $(SRCS_D)%.c includes/libft.h | $(OBJ_D)
-	@echo "$(BLUE)[COMPILING]: $@$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_D)%.o: $(SRCS_D)%.c includes/libft.h Makefile | $(OBJ_D)
+	echo "$(BLUE)[COMPILING]: $@$(RESET)"
+	$(CC) $(CFLAGS) -c $< -o $@
 
 
 $(OBJ_D):
-	@echo "$(YELLOW)[CREATING]: $(OBJ_D)$(RESET)"
-	@mkdir -p $(OBJ_D)
+	echo "$(YELLOW)[CREATING]: $(OBJ_D)$(RESET)"
+	mkdir -p $(OBJ_D)
 
 $(BIN_D):
-	@echo "$(YELLOW)[CREATING]: $(BIN_D)$(RESET)"
-	@mkdir -p $(BIN_D)
+	echo "$(YELLOW)[CREATING]: $(BIN_D)$(RESET)"
+	mkdir -p $(BIN_D)
 
 .PHONY: clean
 clean:
-	@echo "$(RED)[CLEAN]: obj files$(RESET)"
-	@$(RM) $(OBJ)
+	echo "$(RED)[CLEAN]: obj files$(RESET)"
+	$(RM) $(OBJ)
 
 .PHONY: fclean
 fclean: clean
-	@echo "$(RED)[CLEAN]: binaries$(RESET)"
-	@$(RM) $(BIN_D)$(NAME)
-	@$(RM) $(BIN_D)a.out
-	@$(RM) $(BIN_D)libft.so
+	echo "$(RED)[CLEAN]: binaries$(RESET)"
+	$(RM) $(BIN_D)$(NAME)
+	$(RM) $(BIN_D)a.out
+	$(RM) $(BIN_D)libft.so
 
 .PHONY: re
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	$(MAKE) fclean
+	$(MAKE) all
 
-debug:
-	$(CFLAGS) += -g3
-	$(CC) $(CFLAGS) $(SRCS) -o $(BIN_D)a.out
+debug: $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(BIN_D)a.out
+	echo "$(GREEN)[SUCCESS]$(RESET)"
 
 run: debug
 	$(BIN_D)a.out
