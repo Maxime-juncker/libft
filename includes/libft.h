@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:49:29 by mjuncker          #+#    #+#             */
-/*   Updated: 2024/12/19 12:15:59 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:15:02 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ int		ft_lstsize(t_list *lst);
 int		ft_putaddr(long int nbr, char *base, int fd);
 int		ft_printf(const char *s, ...);
 
+int		ft_abs(int n);
+int		ft_max(int a, int b);
+int		ft_min(int a, int b);
+
 int		ft_putnbr_fd(int n, int fd);
 int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
@@ -84,5 +88,7 @@ char	**ft_split(char const *s, char c);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_lstchr_n(t_list *lst, int n);
+t_list	*ft_lstchr(t_list *lst, void *content);
 
 #endif
