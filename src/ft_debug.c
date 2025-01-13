@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:51:52 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/01/08 15:22:20 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:43:40 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,27 @@
 #define B_CYAN		"\033[46m"
 #define B_WHITE		"\033[47m"
 
-void	debug_color(char *msg, char *color)
+void	debug_color(const char *msg, const char *color)
 {
 	ft_printf("%s%s\033[0m\n", color, msg);
 }
 
-void	alert(char *msg)
-{
-	debug_color(msg, B_RED);
-}
-
-void	success(char *msg)
+void	success(const char *msg)
 {
 	debug_color(msg, GREEN);
 }
 
-void	error(char *msg)
-{
-	debug_color(msg, RED);
-}
-
-void	warning(char *msg)
+void	warning(const char *msg)
 {
 	debug_color(msg, YELLOW);
+}
+
+void	alert(const char *msg)
+{
+	debug_color(msg, B_RED);
+}
+
+void	error(const char *msg)
+{
+	debug_color(msg, RED);
 }

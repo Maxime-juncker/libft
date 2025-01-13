@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:49:29 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/01/08 15:15:02 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:44:38 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		ft_tolower(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_atoi(const char *nptr);
+int		overflow_check(const char *s, void (*f)(int, void *), void *param);
 int		ft_lstsize(t_list *lst);
 int		ft_putaddr(long int nbr, char *base, int fd);
 int		ft_printf(const char *s, ...);
@@ -91,4 +92,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_lstchr_n(t_list *lst, int n);
 t_list	*ft_lstchr(t_list *lst, void *content);
 
+// debug.c
+void	debug_color(const char *msg, const char *color);
+void	success(const char *msg);
+void	warning(const char *msg);
+void	error(const char *msg);
+void	alert(const char *msg);
 #endif
