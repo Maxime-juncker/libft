@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2025/01/08 14:01:50 by mjuncker         ###   ########.fr        #
+#    Updated: 2025/01/17 13:50:53 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,8 @@ SRCS =  ft_isalpha.c 		\
 		ft_lstchr.c			\
 		ft_numbers.c		\
 		ft_debug.c			\
+		ft_lstnew.c			\
+		ft_lstprint.c		\
 
 OBJ = $(SRCS:.c=.o)
 
@@ -82,45 +84,46 @@ MAKEFLAGS += -s
 RM = rm -fr
 
 # colors
-RED = \033[31m
-GREEN = \033[32m
-YELLOW = \033[33m
-RESET = \033[0m
-BLUE = \033[34m
+RED = 			\033[31m
+GREEN = 		\033[32m
+YELLOW = 		\033[33m
+RESET = 		\033[0m
+BLUE = 			\033[34m
+CURSOR_OFF =	\e[?25l
+CURSOR_ON = 	\e[?25h
 
 .PHONY: all
 all : $(BIN_D)$(NAME)
 
 $(BIN_D)$(NAME): $(OBJ) | $(BIN_D)
-	echo "$(GREEN)[LINKING]: $(NAME)$(RESET)"
+	printf "compiling: [$$(ls obj | wc -l)/$(shell ls src | wc -l)] [OK]\r\n"
 	ar rcs $(BIN_D)$(NAME) $(OBJ)
-	echo "$(GREEN)[SUCCESS]$(RESET)"
-
+	printf "$(GREEN)$(NAME): success\n"
+	printf "\n---------------------$(CURSOR_ON)\n\n"
 
 $(OBJ_D)%.o: $(SRCS_D)%.c includes/libft.h Makefile | $(OBJ_D)
-	echo "$(BLUE)[COMPILING]: $@$(RESET)"
+	printf "$(CURSOR_OFF)$(BLUE)"
 	$(CC) $(CFLAGS) -c $< -o $@
+	printf "compiling: [$$(ls obj | wc -l)/$(shell ls src | wc -l)]\r"
 
 
 $(OBJ_D):
-	echo "$(YELLOW)[CREATING]: $(OBJ_D)$(RESET)"
 	mkdir -p $(OBJ_D)
 
 $(BIN_D):
-	echo "$(YELLOW)[CREATING]: $(BIN_D)$(RESET)"
 	mkdir -p $(BIN_D)
 
 .PHONY: clean
 clean:
-	echo "$(RED)[CLEAN]: obj files$(RESET)"
-	$(RM) $(OBJ)
+	printf "\n$(RED)clean:\t$(NAME)\n\n$(RESET)"
+	$(RM) $(OBJ_D)
+
 
 .PHONY: fclean
-fclean: clean
-	echo "$(RED)[CLEAN]: binaries$(RESET)"
-	$(RM) $(BIN_D)$(NAME)
-	$(RM) $(BIN_D)a.out
-	$(RM) $(BIN_D)libft.so
+fclean:
+	printf "\n$(RED)fclean:\t$(NAME)$(RESET)"
+	$(MAKE) clean
+	$(RM) $(BIN_D)
 
 .PHONY: re
 re:
