@@ -16,7 +16,7 @@ creating utility fonction based on the libc
 first clone the repo
 ```
 git clone https://github.com/Maxime-juncker/libft.git
-cd minitalk
+cd libft
 ```
 
 then compile the project using make
