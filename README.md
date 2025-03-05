@@ -22,7 +22,7 @@ make
 the libft.a is created under bin/
 to use the libft in a project, do not forget to add it when linking
 ```
-gcc <flags> <files> libft/bin/libft.a -o <name>
+gcc <flags> <files> <path_to_libft>/bin/libft.a -o <name>
 ```
 
 
