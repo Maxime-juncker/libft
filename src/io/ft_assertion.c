@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_assertion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 15:49:29 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 11:41:36 by mjuncker         ###   ########.fr       */
+/*   Created: 2025/03/05 11:56:02 by mjuncker          #+#    #+#             */
+/*   Updated: 2025/03/05 11:56:17 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft/io.h"
 
-# include "libft/memory.h"
-# include "libft/string.h"
-# include "libft/io.h"
-# include "libft/is.h"
-# include "libft/math.h"
-# include "libft/link_list.h"
-
-#endif
+int	malloc_assert(void *mem, const char *file, int line, const char *function)
+{
+	if (mem)
+		return (0);
+	ft_dprintf(2, "%s%s:%d: %sminishell: malloc assertion failed in %s'%s'\n",
+		GRAY, file, line, RED, RESET, function);
+	return (-1);
+}

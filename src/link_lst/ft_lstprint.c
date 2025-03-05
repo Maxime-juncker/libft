@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 15:49:29 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 11:41:36 by mjuncker         ###   ########.fr       */
+/*   Created: 2024/12/19 12:23:24 by mjuncker          #+#    #+#             */
+/*   Updated: 2025/03/05 11:32:08 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft/link_list.h"
+#include "libft/io.h"
 
-# include "libft/memory.h"
-# include "libft/string.h"
-# include "libft/io.h"
-# include "libft/is.h"
-# include "libft/math.h"
-# include "libft/link_list.h"
-
-#endif
+void	ft_lstprint(t_list *lst)
+{
+	ft_printf("[");
+	while (lst->next)
+	{
+		ft_printf("%s => ", lst->content);
+		lst = lst->next;
+	}
+	ft_printf("%s]\n", lst->content);
+}

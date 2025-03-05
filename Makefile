@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2025/01/17 13:50:53 by mjuncker         ###   ########.fr        #
+#    Updated: 2025/03/05 11:57:03 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ OBJ_D		= obj/
 SRCS_D		= src/
 BIN_D		= bin/
 INCLUDES_D	= includes/
+
+VPATH = src:src/str:src/mem:src/math:src/link_lst:src/is:src/io
 
 # src file names
 SRCS =  ft_isalpha.c 		\
@@ -68,43 +70,48 @@ SRCS =  ft_isalpha.c 		\
 		ft_debug.c			\
 		ft_lstnew.c			\
 		ft_lstprint.c		\
+		ft_iswhitespace.c	\
+		ft_atos.c			\
+		ft_sortarr.c		\
+		ft_dprintf.c		\
 
 OBJ = $(SRCS:.c=.o)
 
 # adding path for src and obj
 OBJ := $(addprefix $(OBJ_D), $(OBJ))
 SRCS := $(addprefix $(SRCS_D), $(SRCS))
+DEPS = $(OBJ:.o=.d)
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=4
+CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=20 -MP -MMD
 MAKEFLAGS += -s
 
 # commands
 RM = rm -fr
 
-# colors
-RED = 			\033[31m
-GREEN = 		\033[32m
-YELLOW = 		\033[33m
-RESET = 		\033[0m
-BLUE = 			\033[34m
-CURSOR_OFF =	\e[?25l
-CURSOR_ON = 	\e[?25h
+RESET 		= \033[0m
+GRAY		=\033[90m
+RED 		= \033[31m
+GREEN 		= \033[32m
+YELLOW 		= \033[33m
+BLUE 		= \033[34m
+CURSOR_OFF 	= \e[?25l
+CURSOR_ON 	= \e[?25h
+
 
 .PHONY: all
 all : $(BIN_D)$(NAME)
 
 $(BIN_D)$(NAME): $(OBJ) | $(BIN_D)
-	printf "compiling: [$$(ls obj | wc -l)/$(shell ls src | wc -l)] [OK]\r\n"
 	ar rcs $(BIN_D)$(NAME) $(OBJ)
 	printf "$(GREEN)$(NAME): success\n"
 	printf "\n---------------------$(CURSOR_ON)\n\n"
 
-$(OBJ_D)%.o: $(SRCS_D)%.c includes/libft.h Makefile | $(OBJ_D)
+$(OBJ_D)%.o: %.c includes/libft.h Makefile | $(OBJ_D)
 	printf "$(CURSOR_OFF)$(BLUE)"
 	$(CC) $(CFLAGS) -c $< -o $@
-	printf "compiling: [$$(ls obj | wc -l)/$(shell ls src | wc -l)]\r"
+	printf "$(GRAY)compiling: $(BLUE)%-40s $(GRAY)[%d/%d]\n" "$<" "$$(find ./obj/ -maxdepth 1 -type f -name '*.o' | wc -l)" "$(words $(SRCS))"
 
 
 $(OBJ_D):
@@ -136,3 +143,5 @@ debug: $(OBJ)
 
 run: debug
 	$(BIN_D)a.out
+
+-include $(DEPS)
