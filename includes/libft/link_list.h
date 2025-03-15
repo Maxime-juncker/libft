@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:14:59 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 11:18:34 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:04:22 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));

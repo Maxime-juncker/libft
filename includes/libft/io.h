@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:15:47 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 12:16:50 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:05:08 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
+
+# define GET_VARIABLE_NAME(Variable) (#Variable)
 
 // debug.c
 void	success(const char *msg);

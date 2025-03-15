@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:16:33 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 11:57:56 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:04:26 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dsize);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+char	*ft_strtrim(char const *s1, char const *set);
 
 // string allocation
 char	*ft_strjoin(char *s1, char const *s2);
@@ -49,7 +50,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 
 // string parsing
-char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
 #endif
