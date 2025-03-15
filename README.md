@@ -72,7 +72,8 @@ to use io function you'll need to include ```libft/string.h```
 | ft_strncmp      | compare two string up to ```n``` character |
 | ft_strcmp       | compare two string |
 | ft_strnstr      | search for the fisrt occurent of patern in the string |
-| ft_strtrim      | trim a string (ex: ...helo... -> helo)
+| ft_strtrim      | trim a string (ex: ...hello... -> helo)
+| ft_strpad       | add a char at the beggining and end of a string |
 | ft_substr       | return a sub string from the big string |
 | ft_tolower      | set a character to it's lower form |
 | ft_toupper      | set a character to it's upper form |
