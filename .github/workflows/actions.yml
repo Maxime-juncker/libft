@@ -8,4 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo test
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install -U norminette
+      - run: norminette
