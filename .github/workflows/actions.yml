@@ -11,3 +11,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: python3 -m pip install -U norminette
       - run: norminette
+      - run: pwd
