@@ -1,0 +1,8 @@
+name: github-action-libft
+
+on: [push]
+
+jobs:
+  runs-on: alpine-latest
+  steps:
+    - run: echo test
