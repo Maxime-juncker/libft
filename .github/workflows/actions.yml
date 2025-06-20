@@ -1,8 +1,11 @@
 name: github-action-libft
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - run: echo test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test
