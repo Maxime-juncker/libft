@@ -3,6 +3,6 @@ name: github-action-libft
 on: [push]
 
 jobs:
-  runs-on: alpine-latest
+  runs-on: ubuntu-latest
   steps:
     - run: echo test
