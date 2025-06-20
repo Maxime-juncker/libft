@@ -41,8 +41,6 @@
 #  define BUFFER_SIZE 10
 # endif
 
-# define GET_VARIABLE_NAME(Variable) (#Variable)
-
 // debug.c
 void	success(const char *msg);
 void	warning(const char *msg);
