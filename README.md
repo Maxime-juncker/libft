@@ -55,6 +55,7 @@ to use io function you'll need to include ```libft/string.h```
 | function        | description                                         |
 | --------------- | ----------------------------------------------------|
 | ft_atoi         | convert a string to an int |
+| ft_strtol       |  convert string to long using a base (e.g hex, dec...) |
 | ft_atos         | convert a array of string into a single string |
 | ft_itoa         | convert a int to a string |
 | ft_sortarr      | sort an array of string |
