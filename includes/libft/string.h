@@ -23,6 +23,7 @@ int		ft_atoi(const char *nptr);
 char	*ft_atos(char **arr, char separator);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
+long	ft_strtol(const char* nptr, char** endptr, int base);
 
 // string math
 size_t	ft_strlen(const char *s);

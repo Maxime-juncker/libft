@@ -74,6 +74,7 @@ SRCS =  ft_isalpha.c 		\
 		ft_atos.c			\
 		ft_sortarr.c		\
 		ft_dprintf.c		\
+		ft_strtol.c			\
 
 OBJ = $(SRCS:.c=.o)
 
