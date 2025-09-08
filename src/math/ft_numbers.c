@@ -30,3 +30,18 @@ int	ft_max(int a, int b)
 		return (a);
 	return (b);
 }
+
+int	ft_pow(int a, int n)
+{
+	int	res;
+
+	if (n == 0)
+		return (0);
+	res = a;
+	while (n - 1 > 0)
+	{
+		res *= a;
+		n--;
+	}
+	return (res);
+}

@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtol.c                                        :+:      :+:    :+:   */
+/*   ft_strtod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 09:00:17 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/09/08 09:57:23 by mjuncker         ###   ########.fr       */
+/*   Created: 2025/09/08 09:36:40 by mjuncker          #+#    #+#             */
+/*   Updated: 2025/09/08 09:59:08 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/string.h"
 #include "libft/is.h"
+#include "libft/math.h"
 
 static int	get_sign(const char *s, int *i)
 {
@@ -29,40 +30,31 @@ static int	get_sign(const char *s, int *i)
 	return (sign);
 }
 
-static int	in_base(char c, char *base, int base_len)
+double	ft_strtod(const char *nptr, char **endptr)
 {
-	int	i;
+	int		i;
+	double	res;
+	int		sign;
+	int		dot_start;
 
-	i = 0;
-	while (base[i] && i < base_len)
-	{
-		if (base[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-long	ft_strtol(const char *nptr, char **endptr, int base)
-{
-	static char	b[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	long		n;
-	int			i;
-	int			sign;
-	int			tmp;
-
-	n = 0;
+	res = 0;
 	i = 0;
 	sign = get_sign(nptr, &i);
-	tmp = in_base(ft_toupper(nptr[i]), b, base);
-	while (tmp != -1)
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		n *= base;
-		n += tmp;
+		res = (res * 10) + (nptr[i] - '0');
 		i++;
-		tmp = in_base(ft_toupper(nptr[i]), b, base);
 	}
-	*endptr = (char *)(&nptr[i]);
-	n *= sign;
-	return (n);
+	if (nptr[i] == '.')
+	{
+		dot_start = i;
+		i++;
+		while (nptr[i] >= '0' && nptr[i] <= '9')
+		{
+			res += (nptr[i] - '0') / (float)ft_pow(10, ((float)i - dot_start));
+			i++;
+		}
+	}
+	*endptr = (char *)&nptr[i];
+	return (res * sign);
 }

@@ -12,6 +12,7 @@
 
 #include "libft/math.h"
 #include <limits.h>
+#include <stdlib.h>
 
 static int	call_func(int n, void (*f)(int, void *), void *param)
 {

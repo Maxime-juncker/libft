@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:16:33 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/15 10:04:26 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/09/08 09:56:25 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		ft_atoi(const char *nptr);
 char	*ft_atos(char **arr, char separator);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
-long	ft_strtol(const char* nptr, char** endptr, int base);
+long	ft_strtol(const char *nptr, char **endptr, int base);
+double	ft_strtod(const char *nptr, char **endptr);
 
 // string math
 size_t	ft_strlen(const char *s);

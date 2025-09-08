@@ -13,12 +13,11 @@
 #ifndef MATH_H
 # define MATH_H
 
-# include <stdlib.h>
-
 int		overflow_check(const char *s, void (*f)(int, void *), void *param);
 
 int		ft_abs(int n);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
+int		ft_pow(int a, int n);
 
 #endif

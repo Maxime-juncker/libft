@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2025/03/05 11:57:03 by mjuncker         ###   ########.fr        #
+#    Updated: 2025/09/08 09:56:51 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS =  ft_isalpha.c 		\
 		ft_sortarr.c		\
 		ft_dprintf.c		\
 		ft_strtol.c			\
+		ft_strtod.c			\
 
 OBJ = $(SRCS:.c=.o)
 
