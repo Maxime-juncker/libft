@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:15:47 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/15 10:05:08 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:25:30 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define PURPLE	"\033[0;35m"
 # define CYAN	"\033[0;36m"
 # define WHITE	"\033[0;37m"
-# define GRAY	"\033[0;30m"
+# define GRAY	"\033[0;90m"
 
 // Background
 # define B_BLACK	"\033[40m"
@@ -55,6 +55,7 @@ int		ft_putstr_fd(char *s, int fd);
 int		ft_putendl_fd(char *s, int fd);
 int		ft_putnbr_hex(unsigned long int nbr, char *base, int fd);
 int		ft_putaddr(long int nbr, char *base, int fd);
+int		ft_putdouble(double d);
 
 // printf functions
 int		ft_printf(const char *s, ...);
