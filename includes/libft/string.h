@@ -21,8 +21,9 @@
 // string convertions
 int		ft_atoi(const char *nptr);
 char	*ft_atos(char **arr, char separator);
-char	*ft_itoa(int n);
-char	*ft_uitoa(unsigned int n);
+
+char	*ft_itoa(char *buffer, size_t size, int n);
+char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base);
 long	ft_strtol(const char *nptr, char **endptr, int base);
 double	ft_strtod(const char *nptr, char **endptr);
 
@@ -37,6 +38,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dsize);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strtrim(char const *s1, char const *set);
+char*	ft_reverse_buffer(char *buffer);
 
 // string allocation
 char	*ft_strjoin(char *s1, char const *s2);
@@ -47,6 +49,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
 
 // string search
+int		ft_strfind(const char *str, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *big, const char *little, size_t len);

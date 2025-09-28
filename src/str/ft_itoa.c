@@ -11,96 +11,36 @@
 /* ************************************************************************** */
 
 #include "libft/string.h"
+#include "libft/memory.h"
 
-static size_t	get_nb_len(int n)
+char	*ft_itoa(char *buffer, size_t size, int n)
 {
-	size_t		i;
-	long int	nb;
-
-	nb = (long)n;
-	i = 1;
-	if (nb < 0)
-	{
-		i++;
-		nb *= -1;
-	}
-	while (nb / 10 > 0)
-	{
-		i++;
-		nb /= 10;
-	}
-	return (i);
+	return (ft_itoa_base(buffer, size, n, "0123456789"));
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base)
 {
-	long int	nb;
-	char		*res;
-	size_t		i;
-	size_t		len;
+	int		i;
+	long	nb;
+	int		len;
 
-	len = get_nb_len(n);
-	nb = (long)n;
-	res = malloc(len + 1);
+	nb = n;
 	i = 0;
-	if (!res)
-		return (NULL);
-	if (n == 0)
-		res[0] = '0';
+	len = ft_strlen(base);
+	ft_bzero(buffer, size);
+	if (nb == 0)
+		buffer[0] = base[0];
 	if (nb < 0)
 	{
+		buffer[0] = '-';
 		nb *= -1;
-		res[0] = '-';
+		i++;
 	}
 	while (nb > 0)
 	{
-		res[len - i++ - 1] = (nb % 10) + '0';
-		nb /= 10;
-	}
-	res[len] = '\0';
-	return (res);
-}
-
-static size_t	uget_nb_len(unsigned int n)
-{
-	size_t		i;
-	long int	nb;
-
-	nb = (long)n;
-	i = 1;
-	if (nb < 0)
-	{
+		buffer[i] = base[nb % len];
+		nb /= len;
 		i++;
-		nb *= -1;
 	}
-	while (nb / 10 > 0)
-	{
-		i++;
-		nb /= 10;
-	}
-	return (i);
-}
-
-char	*ft_uitoa(unsigned int n)
-{
-	unsigned long int	nb;
-	char				*res;
-	size_t				i;
-	size_t				len;
-
-	len = uget_nb_len(n);
-	nb = (unsigned long)n;
-	res = malloc(len + 1);
-	i = 0;
-	if (!res)
-		return (NULL);
-	if (n == 0)
-		res[0] = '0';
-	while (nb > 0)
-	{
-		res[len - i++ - 1] = (nb % 10) + '0';
-		nb /= 10;
-	}
-	res[len] = '\0';
-	return (res);
+	return (ft_reverse_buffer(buffer));
 }

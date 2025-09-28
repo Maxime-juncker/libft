@@ -64,7 +64,6 @@ SRCS =  ft_isalpha.c 		\
 		ft_lstiter.c 		\
 		ft_lstmap.c			\
 		ft_get_next_line.c	\
-		ft_printf.c			\
 		ft_lstchr.c			\
 		ft_numbers.c		\
 		ft_debug.c			\
@@ -73,10 +72,13 @@ SRCS =  ft_isalpha.c 		\
 		ft_iswhitespace.c	\
 		ft_atos.c			\
 		ft_sortarr.c		\
-		ft_dprintf.c		\
 		ft_strtol.c			\
 		ft_strtod.c			\
 		ft_putdouble.c		\
+		ft_assertion.c		\
+		ft_sprintf.c		\
+		ft_strutils.c		\
+		main.c				\
 
 OBJ = $(SRCS:.c=.o)
 
@@ -87,7 +89,7 @@ DEPS = $(OBJ:.o=.d)
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=20 -MP -MMD
+CFLAGS = -Wall -Wextra -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=20 -MP -MMD
 MAKEFLAGS += -s
 
 # commands
@@ -140,7 +142,7 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-debug: $(OBJ)
+debug: $(OBJ) | $(BIN_D)
 	$(CC) $(CFLAGS) $(OBJ) -o $(BIN_D)a.out
 	echo "$(GREEN)[SUCCESS]$(RESET)"
 

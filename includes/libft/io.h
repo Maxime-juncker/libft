@@ -49,17 +49,18 @@ void	alert(const char *msg);
 void	info(const char *msg);
 
 // put function
-int		ft_putnbr_fd(int n, int fd);
+int		ft_putnbr_base_fd(int fd, int n, const char* base);
+int		ft_putnbr_fd(int fd, int n);
 int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 int		ft_putendl_fd(char *s, int fd);
-int		ft_putnbr_hex(unsigned long int nbr, char *base, int fd);
 int		ft_putaddr(long int nbr, char *base, int fd);
 int		ft_putdouble(double d);
 
 // printf functions
 int		ft_printf(const char *s, ...);
 int		ft_dprintf(int fd, const char *s, ...);
+int		ft_sprintf(char *str, size_t size, const char *format, ...) __attribute__((format(printf, 3, 4)));
 
 // assestions
 int		malloc_assert(void *mem, const char *file,

@@ -13,48 +13,39 @@
 #include "libft/io.h"
 #include "libft/string.h"
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int fd, int n)
 {
-	char	*nb;
-	int		len;
-
-	nb = ft_itoa(n);
-	len = ft_strlen(nb);
-	while (len > 0)
-	{
-		ft_putchar_fd(nb[ft_strlen(nb) - len], fd);
-		len--;
-	}
-	len = ft_strlen(nb);
-	free(nb);
-	return (len);
+	return ft_putnbr_base_fd(fd, n, "0123456789");
 }
 
-int	ft_putnbr_hex(unsigned long int nbr, char *base, int fd)
+int	ft_putnbr_base_fd(int fd, int n, const char* base)
 {
-	char	buffer[16];
-	int		i;
-	int		count;
+	char	buffer[64];
 
-	if (nbr == 0)
-		return (ft_putchar_fd('0', fd));
+	ft_itoa_base(buffer, sizeof(buffer), n, base);
+	return (ft_putstr_fd(buffer, fd));
+}
+
+char*	ft_reverse_buffer(char *buffer)
+{
+	size_t	len;
+	size_t	i;
+	char	tmp;
+
+	len = ft_strlen(buffer);
 	i = 0;
-	count = 0;
-	while (nbr > 0)
+	while (i < len / 2)
 	{
-		buffer[i++] = base[nbr % 16];
-		nbr /= 16;
+		tmp = buffer[i];
+		buffer[i] = buffer[len - 1 - i];
+		buffer[len - 1 - i] = tmp;
+		i++;
 	}
-	while (i > 0)
-	{
-		ft_putchar_fd(buffer[--i], fd);
-		count++;
-	}
-	return (count);
+	return (buffer);
 }
 
 int	ft_putaddr(long int nbr, char *base, int fd)
 {
 	ft_putstr_fd("0x", 1);
-	return (ft_putnbr_hex(nbr, base, fd) + 2);
+	return (ft_putnbr_base_fd(fd, nbr, base) + 2);
 }
