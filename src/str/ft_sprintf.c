@@ -1,3 +1,4 @@
+#include "libft/io.h"
 #include "libft/string.h"
 #include "libft/is.h"
 
@@ -7,9 +8,30 @@
 int		ft_printf(const char *s, ...) {(void)s;return 0;}
 int		ft_dprintf(int fd, const char *s, ...) {(void)s; (void)fd; return 0;}
 
-int	add_num(char opt, char *buffer, size_t size, va_list *ptr)
+int	add_option_text(char opt, char *buffer, size_t size, va_list *ptr)
 {
-	char	tmp_buf[128];
+	char	tmp_buf[128] = {0};
+
+	if (opt == 'p')
+	{
+		printf("\n");
+		ft_uitoaddr(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, unsigned int));
+		// ft_putaddr(va, char *base, int fd)
+		return ft_strlcat(buffer, tmp_buf, size);
+	}
+	if (opt == 's')
+		return ft_strlcat(buffer, va_arg(*ptr, char*), size);
+	if (opt == 'c')
+	{
+		buffer[ft_strlen(buffer)] = va_arg(*ptr, int);
+		return ft_strlen(buffer) + 1;
+	}
+	return -1;
+}
+
+int	add_option_num(char opt, char *buffer, size_t size, va_list *ptr)
+{
+	char	tmp_buf[128] = {0};
 
 	if (opt == 'd' || opt == 'i')
 	{
@@ -23,25 +45,22 @@ int	add_num(char opt, char *buffer, size_t size, va_list *ptr)
 	}
 	if (opt == 'x')
 	{
-		ft_itoa_base(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, int),
+		ft_uitoa_base(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, int),
 			   "0123456789abcdef");
 		return ft_strlcat(buffer, tmp_buf, size);
 	}
 	if (opt == 'X')
 	{
-		ft_itoa_base(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, int),
+		ft_uitoa_base(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, int),
 			   "0123456789ABCDEF");
 		return ft_strlcat(buffer, tmp_buf, size);
 	}
-	if (opt == 's')
-		return ft_strlcat(buffer, va_arg(*ptr, char*), size);
 	return -1;
 }
 
 int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
 {
 	const char options[] = "dXxuiscp%";	
-	char		tmp_buf[128] = {0};
 	int			buf_len;
 	int			align[2] = {
 					-1, // -1 is left algin 1 is right align
@@ -58,10 +77,12 @@ int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
 		return -1;
 
 	buf_len = ft_strlen(buffer);
-	if (opt_i <= 5)
-		add_num(options[opt_i], buffer, size, ptr);
-	if (options[opt_i] == 'c')
-		buffer[buf_len] = va_arg(*ptr, int);
+	if (opt_i <= 4)
+		add_option_num(options[opt_i], buffer, size, ptr);
+	else
+		add_option_text(options[opt_i], buffer, size, ptr);
+	// if (options[opt_i] == 'c')
+	// 	buffer[buf_len] = va_arg(*ptr, int);
 
 	*str += 2;
 	return ft_strlen(buffer) - buf_len;

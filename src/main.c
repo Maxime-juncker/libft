@@ -6,6 +6,13 @@
 int main(void)
 {
 	char buffer[1024] = {0};
-	ft_sprintf( buffer, sizeof(buffer), "hello world %s %d %x %X %i %u test", "test", -128, 42, 42, 42, -1);
+	int	a = 2;
+	// ft_sprintf( buffer, sizeof(buffer), "hello world %s %d %x %X %i %u %c\n ptr:%p", "test", 
+			// -128, 42, 42, 42, -1, 'a', &a);
+
+	// ft_sprintf( buffer, sizeof(buffer), "hello world %s %d %x %X %i %u %c\n ptr:%p", "test", 
+	ft_sprintf(buffer, sizeof(buffer), "%p %x %u\n", &a, &a, &a);
+	printf("%p %x %u\n", &a, &a, &a);
+	ft_putaddr((unsigned long)&a, "0123456789abcdef", 1);
 	return 0;
 }
