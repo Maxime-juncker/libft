@@ -12,10 +12,16 @@
 
 #include "libft/string.h"
 #include "libft/memory.h"
+#include "libft/math.h"
 
 char	*ft_itoa(char *buffer, size_t size, int n)
 {
 	return (ft_itoa_base(buffer, size, n, "0123456789"));
+}
+
+char	*ft_uitoa(char *buffer, size_t size, unsigned int n)
+{
+	return (ft_uitoa_base(buffer, size, n, "0123456789"));
 }
 
 char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base)
@@ -30,16 +36,31 @@ char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base)
 	ft_bzero(buffer, size);
 	if (nb == 0)
 		buffer[0] = base[0];
-	if (nb < 0)
+	while (nb != 0)
 	{
-		buffer[0] = '-';
-		nb *= -1;
+		buffer[i] = base[ft_abs(nb % len)];
+		nb /= len;
 		i++;
 	}
-	while (nb > 0)
+	if (n < 0)
+		buffer[i] = '-';
+	return (ft_reverse_buffer(buffer));
+}
+
+char	*ft_uitoa_base(char *buffer, size_t size, unsigned int n, const char *base)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = ft_strlen(base);
+	ft_bzero(buffer, size);
+	if (n == 0)
+		buffer[0] = base[0];
+	while (n > 0)
 	{
-		buffer[i] = base[nb % len];
-		nb /= len;
+		buffer[i] = base[n % len];
+		n /= len;
 		i++;
 	}
 	return (ft_reverse_buffer(buffer));

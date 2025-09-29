@@ -24,6 +24,8 @@ char	*ft_atos(char **arr, char separator);
 
 char	*ft_itoa(char *buffer, size_t size, int n);
 char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base);
+char	*ft_uitoa(char *buffer, size_t size, unsigned int n);
+char	*ft_uitoa_base(char *buffer, size_t size, unsigned int n, const char *base);
 long	ft_strtol(const char *nptr, char **endptr, int base);
 double	ft_strtod(const char *nptr, char **endptr);
 
