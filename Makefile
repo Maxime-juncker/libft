@@ -77,7 +77,8 @@ SRCS =  ft_isalpha.c 		\
 		ft_strtod.c			\
 		ft_putdouble.c		\
 		ft_assertion.c		\
-		ft_sprintf.c		\
+		ft_printf.c			\
+		ft_printf_utils.c	\
 		ft_strutils.c		\
 		main.c				\
 

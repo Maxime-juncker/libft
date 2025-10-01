@@ -14,6 +14,7 @@
 # define IO_H
 
 # include <unistd.h>
+# include <stdarg.h>
 
 // colors
 # define RESET	"\033[0m"
@@ -60,10 +61,13 @@ int		ft_putdouble(double d);
 // printf functions
 int		ft_printf(const char *s, ...);
 int		ft_dprintf(int fd, const char *s, ...);
-int		ft_sprintf(char *str, size_t size, const char *format, ...) __attribute__((format(printf, 3, 4)));
+int		ft_snprintf(char *str, size_t size, const char *format, ...) __attribute__((format(printf, 3, 4)));
+int		ft_vsnprintf(char *str, size_t size, const char *format, va_list *ptr);
+
 
 // assestions
 int		malloc_assert(void *mem, const char *file,
 			int line, const char *function);
 
+int	add_segment(char** str, char *buffer, size_t size, va_list* ptr);
 #endif

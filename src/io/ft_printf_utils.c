@@ -5,7 +5,6 @@
 #include "libft/math.h"
 
 #include <stdarg.h>
-#include <stdio.h>
 
 typedef struct s_segment
 {
@@ -16,16 +15,12 @@ typedef struct s_segment
 	char	c;
 }	t_segment;
 
-int		ft_printf(const char *s, ...) {(void)s;return 0;}
-int		ft_dprintf(int fd, const char *s, ...) {(void)s; (void)fd; return 0;}
-
-int	add_option_text(char opt, char *buffer, size_t size, va_list *ptr)
+static int	add_option02(char opt, char *buffer, size_t size, va_list *ptr)
 {
 	char	tmp_buf[128] = {0};
 
 	if (opt == 'p')
 	{
-		printf("\n");
 		ft_uitoaddr(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, void*));
 		return ft_strlcat(buffer, tmp_buf, size);
 	}
@@ -44,7 +39,7 @@ int	add_option_text(char opt, char *buffer, size_t size, va_list *ptr)
 	return -1;
 }
 
-int	add_option_num(char opt, char *buffer, size_t size, va_list *ptr)
+static int	add_option01(char opt, char *buffer, size_t size, va_list *ptr)
 {
 	char	tmp_buf[128] = {0};
 
@@ -73,12 +68,15 @@ int	add_option_num(char opt, char *buffer, size_t size, va_list *ptr)
 	return -1;
 }
 
-int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
+static int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
 {
 	const char		options[] = "dXxuiscpf%";	
 	int				buf_len;
 	t_segment		seg;
+	int				total_size;
+
 	ft_bzero(&seg, sizeof(t_segment));
+	total_size = 0;
 
 	*str += 1; // skip %
 	buf_len = ft_strlen(buffer);
@@ -99,9 +97,9 @@ int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
 		return -1;
 
 	if (opt_i <= 4)
-		add_option_num(options[opt_i], seg.buffer, sizeof(seg.buffer), ptr);
+		total_size = add_option01(options[opt_i], seg.buffer, sizeof(seg.buffer), ptr);
 	else
-		add_option_text(options[opt_i], seg.buffer, sizeof(seg.buffer), ptr);
+		total_size = add_option02(options[opt_i], seg.buffer, sizeof(seg.buffer), ptr);
 
 	if (seg.side == 1)
 	{
@@ -111,15 +109,16 @@ int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
 	for (int i = 0; i + ft_strlen(seg.buffer) < (size_t)ft_abs(seg.min_width); i++)
 	{
 		buffer[buf_len + i] = ' ';
+		total_size++;
 	}
 	if (seg.side == 0)
 		ft_strlcat(buffer, seg.buffer, size);
 
 	*str += 1;
-	return ft_strlen(buffer) - buf_len;
+	return total_size;
 }
 
-int	add_segment(char** str, char *buffer, size_t size, va_list* ptr)
+int	add_segment(char** str, char *buffer, size_t size, va_list *ptr)
 {
 	int		next_arg;
 	size_t	buf_len;
@@ -143,26 +142,3 @@ int	add_segment(char** str, char *buffer, size_t size, va_list* ptr)
 	}
 	return size_written;
 }
-
-#include <stdio.h>
-
-int	ft_sprintf(char *buffer, size_t size, const char *format, ...)
-{
-	va_list	ptr;
-	int		total_size;
-	char	*str;
-
-	va_start(ptr, format);
-	str = (char*)format;
-	total_size = 0;
-	while (*str)
-	{
-		total_size += add_segment(&str, buffer, size, &ptr);
-	}
-
-	printf("%s\n", buffer);
-
-	va_end(ptr);
-	return total_size;
-}
-
