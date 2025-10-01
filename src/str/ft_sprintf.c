@@ -1,9 +1,20 @@
 #include "libft/io.h"
 #include "libft/string.h"
 #include "libft/is.h"
+#include "libft/memory.h"
+#include "libft/math.h"
 
 #include <stdarg.h>
 #include <stdio.h>
+
+typedef struct s_segment
+{
+	char	buffer[1024];
+	char	*backup_buf;
+	short	side;
+	int		min_width;
+	char	c;
+}	t_segment;
 
 int		ft_printf(const char *s, ...) {(void)s;return 0;}
 int		ft_dprintf(int fd, const char *s, ...) {(void)s; (void)fd; return 0;}
@@ -15,8 +26,7 @@ int	add_option_text(char opt, char *buffer, size_t size, va_list *ptr)
 	if (opt == 'p')
 	{
 		printf("\n");
-		ft_uitoaddr(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, unsigned int));
-		// ft_putaddr(va, char *base, int fd)
+		ft_uitoaddr(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, void*));
 		return ft_strlcat(buffer, tmp_buf, size);
 	}
 	if (opt == 's')
@@ -25,6 +35,11 @@ int	add_option_text(char opt, char *buffer, size_t size, va_list *ptr)
 	{
 		buffer[ft_strlen(buffer)] = va_arg(*ptr, int);
 		return ft_strlen(buffer) + 1;
+	}
+	if (opt == 'f')
+	{
+		ft_dtoa(tmp_buf, sizeof(tmp_buf), va_arg(*ptr, double));
+		return ft_strlcat(buffer, tmp_buf, size);
 	}
 	return -1;
 }
@@ -60,31 +75,47 @@ int	add_option_num(char opt, char *buffer, size_t size, va_list *ptr)
 
 int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
 {
-	const char options[] = "dXxuiscp%";	
-	int			buf_len;
-	int			align[2] = {
-					-1, // -1 is left algin 1 is right align
-					0 // min width
-				};
+	const char		options[] = "dXxuiscpf%";	
+	int				buf_len;
+	t_segment		seg;
+	ft_bzero(&seg, sizeof(t_segment));
 
+	*str += 1; // skip %
+	buf_len = ft_strlen(buffer);
 	if (**str == '-' || ft_isdigit(**str)) // text to align
 	{
-		*str += 1;
+		seg.min_width = ft_atoi(*str);
+		if (seg.min_width < 0)
+		{
+			seg.side = 1;
+			*str += 1;
+		}
+		while (ft_isdigit(**str))
+			*str += 1;
 	}
 
-	int opt_i = ft_strfind(options, (*str)[1]);
+	int opt_i = ft_strfind(options, **str);
 	if (opt_i == -1)
 		return -1;
 
-	buf_len = ft_strlen(buffer);
 	if (opt_i <= 4)
-		add_option_num(options[opt_i], buffer, size, ptr);
+		add_option_num(options[opt_i], seg.buffer, sizeof(seg.buffer), ptr);
 	else
-		add_option_text(options[opt_i], buffer, size, ptr);
-	// if (options[opt_i] == 'c')
-	// 	buffer[buf_len] = va_arg(*ptr, int);
+		add_option_text(options[opt_i], seg.buffer, sizeof(seg.buffer), ptr);
 
-	*str += 2;
+	if (seg.side == 1)
+	{
+		ft_strlcat(buffer, seg.buffer, size);
+		buf_len = ft_strlen(buffer);
+	}
+	for (int i = 0; i + ft_strlen(seg.buffer) < (size_t)ft_abs(seg.min_width); i++)
+	{
+		buffer[buf_len + i] = ' ';
+	}
+	if (seg.side == 0)
+		ft_strlcat(buffer, seg.buffer, size);
+
+	*str += 1;
 	return ft_strlen(buffer) - buf_len;
 }
 

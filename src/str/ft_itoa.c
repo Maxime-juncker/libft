@@ -19,10 +19,10 @@ char	*ft_itoa(char *buffer, size_t size, int n)
 	return (ft_itoa_base(buffer, size, n, "0123456789"));
 }
 
-char	*ft_uitoaddr(char *buffer, size_t size, unsigned long long n)
+char	*ft_uitoaddr(char *buffer, size_t size, void *addr)
 {
 	ft_strlcat(buffer, "0x", size);
-	ft_uitoa_base(buffer + 2, size, n, "0123456789abcdef");
+	ft_uitoa_base(buffer + 2, size, (unsigned long)addr, "0123456789abcdef");
 	return buffer;
 }
 
@@ -54,7 +54,7 @@ char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base)
 	return (ft_reverse_buffer(buffer));
 }
 
-char	*ft_uitoa_base(char *buffer, size_t size, unsigned int n, const char *base)
+char	*ft_uitoa_base(char *buffer, size_t size, unsigned long n, const char *base)
 {
 	int		i;
 	int		len;

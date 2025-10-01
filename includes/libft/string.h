@@ -20,13 +20,13 @@
 
 // string convertions
 int		ft_atoi(const char *nptr);
+char	*ft_dtoa(char *buffer, size_t size, double d);
 char	*ft_atos(char **arr, char separator);
-
 char	*ft_itoa(char *buffer, size_t size, int n);
 char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base);
 char	*ft_uitoa(char *buffer, size_t size, unsigned int n);
-char	*ft_uitoa_base(char *buffer, size_t size, unsigned int n, const char *base);
-char	*ft_uitoaddr(char *buffer, size_t size, unsigned long long n);
+char	*ft_uitoa_base(char *buffer, size_t size, unsigned long n, const char *base);
+char	*ft_uitoaddr(char *buffer, size_t size, void *ptr);
 long	ft_strtol(const char *nptr, char **endptr, int base);
 double	ft_strtod(const char *nptr, char **endptr);
 
