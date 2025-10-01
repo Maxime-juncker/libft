@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:15:47 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/09/08 14:25:30 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:35:17 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,27 @@ void	alert(const char *msg);
 void	info(const char *msg);
 
 // put function
-int		ft_putnbr_base_fd(int fd, int n, const char* base);
+int		ft_putnbr_base_fd(int fd, int n, const char *base);
 int		ft_putnbr_fd(int fd, int n);
 int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 int		ft_putendl_fd(char *s, int fd);
 int		ft_putaddr(long int nbr, char *base, int fd);
-int		ft_putdouble(double d);
 
 // printf functions
-int		ft_printf(const char *s, ...);
-int		ft_dprintf(int fd, const char *s, ...);
-int		ft_snprintf(char *str, size_t size, const char *format, ...) __attribute__((format(printf, 3, 4)));
-int		ft_vsnprintf(char *str, size_t size, const char *format, va_list *ptr);
+int		ft_printf(const char *s, ...)
+		__attribute__((format(printf, 1, 2)));
 
+int		ft_dprintf(int fd, const char *s, ...)
+		__attribute__((format(printf, 2, 3)));
+
+int		ft_snprintf(char *str, size_t size, const char *format, ...)
+		__attribute__((format(printf, 3, 4)));
+
+int		ft_vsnprintf(char *str, size_t size, const char *format, va_list *ptr);
 
 // assestions
 int		malloc_assert(void *mem, const char *file,
 			int line, const char *function);
 
-int	add_segment(char** str, char *buffer, size_t size, va_list* ptr);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:26:23 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 11:28:26 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:37:59 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	ft_putnbr_fd(int fd, int n)
 {
-	return ft_putnbr_base_fd(fd, n, "0123456789");
+	return (ft_putnbr_base_fd(fd, n, "0123456789"));
 }
 
-int	ft_putnbr_base_fd(int fd, int n, const char* base)
+int	ft_putnbr_base_fd(int fd, int n, const char *base)
 {
 	char	buffer[64];
 
@@ -26,7 +26,7 @@ int	ft_putnbr_base_fd(int fd, int n, const char* base)
 	return (ft_putstr_fd(buffer, fd));
 }
 
-char*	ft_reverse_buffer(char *buffer)
+char	*ft_reverse_buffer(char *buffer)
 {
 	size_t	len;
 	size_t	i;

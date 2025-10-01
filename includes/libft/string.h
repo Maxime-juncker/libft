@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:16:33 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/09/08 09:56:25 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/10/01 14:18:33 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 
 // string convertions
 int		ft_atoi(const char *nptr);
-char	*ft_dtoa(char *buffer, size_t size, double d);
+char	*ft_dtoa(char *buffer, size_t size, double d, int precision);
 char	*ft_atos(char **arr, char separator);
 char	*ft_itoa(char *buffer, size_t size, int n);
 char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base);
 char	*ft_uitoa(char *buffer, size_t size, unsigned int n);
-char	*ft_uitoa_base(char *buffer, size_t size, unsigned long n, const char *base);
+char	*ft_uitoa_base(char *buffer, size_t size, unsigned long n,
+			const char *base);
 char	*ft_uitoaddr(char *buffer, size_t size, void *ptr);
 long	ft_strtol(const char *nptr, char **endptr, int base);
 double	ft_strtod(const char *nptr, char **endptr);
@@ -41,7 +42,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dsize);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strtrim(char const *s1, char const *set);
-char*	ft_reverse_buffer(char *buffer);
+char	*ft_reverse_buffer(char *buffer);
 
 // string allocation
 char	*ft_strjoin(char *s1, char const *s2);

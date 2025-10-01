@@ -18,8 +18,8 @@ void	ft_lstprint(t_list *lst)
 	ft_printf("[");
 	while (lst->next)
 	{
-		ft_printf("%s => ", lst->content);
+		ft_printf("%s => ", (char *)lst->content);
 		lst = lst->next;
 	}
-	ft_printf("%s]\n", lst->content);
+	ft_printf("%s]\n", (char *)lst->content);
 }

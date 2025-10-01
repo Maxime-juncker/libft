@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strutils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 15:28:13 by mjuncker          #+#    #+#             */
+/*   Updated: 2025/10/01 15:28:30 by mjuncker         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 int	ft_strfind(const char *str, char c)
 {
 	int	i;
@@ -6,8 +18,8 @@ int	ft_strfind(const char *str, char c)
 	while (str[i])
 	{
 		if (str[i] == c)
-			return i;
+			return (i);
 		i++;
 	}
-	return -1;
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:04:13 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 11:24:17 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:30:42 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_uitoaddr(char *buffer, size_t size, void *addr)
 {
 	ft_strlcat(buffer, "0x", size);
 	ft_uitoa_base(buffer + 2, size, (unsigned long)addr, "0123456789abcdef");
-	return buffer;
+	return (buffer);
 }
 
 char	*ft_uitoa(char *buffer, size_t size, unsigned int n)
@@ -54,7 +54,8 @@ char	*ft_itoa_base(char *buffer, size_t size, int n, const char *base)
 	return (ft_reverse_buffer(buffer));
 }
 
-char	*ft_uitoa_base(char *buffer, size_t size, unsigned long n, const char *base)
+char	*ft_uitoa_base(char *buffer, size_t size,
+			unsigned long n, const char *base)
 {
 	int		i;
 	int		len;

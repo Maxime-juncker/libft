@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2025/09/08 14:26:37 by mjuncker         ###   ########.fr        #
+#    Updated: 2025/10/01 15:37:46 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS_D		= src/
 BIN_D		= bin/
 INCLUDES_D	= includes/
 
-VPATH = src:src/str:src/mem:src/math:src/link_lst:src/is:src/io
+VPATH = src:src/str:src/mem:src/math:src/link_lst:src/is:src/io:src/io/ft_printf
 
 # src file names
 SRCS =  ft_isalpha.c 		\
@@ -75,12 +75,12 @@ SRCS =  ft_isalpha.c 		\
 		ft_sortarr.c		\
 		ft_strtol.c			\
 		ft_strtod.c			\
-		ft_putdouble.c		\
 		ft_assertion.c		\
 		ft_printf.c			\
 		ft_printf_utils.c	\
+		ft_printf_options.c	\
 		ft_strutils.c		\
-		main.c				\
+		# main.c				\
 
 OBJ = $(SRCS:.c=.o)
 
@@ -91,7 +91,7 @@ DEPS = $(OBJ:.o=.d)
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Wextra -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=20 -MP -MMD
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=20 -MP -MMD
 MAKEFLAGS += -s
 
 # commands
@@ -103,8 +103,6 @@ RED 		= \033[31m
 GREEN 		= \033[32m
 YELLOW 		= \033[33m
 BLUE 		= \033[34m
-CURSOR_OFF 	= \e[?25l
-CURSOR_ON 	= \e[?25h
 
 
 .PHONY: all
@@ -113,10 +111,10 @@ all : $(BIN_D)$(NAME)
 $(BIN_D)$(NAME): $(OBJ) | $(BIN_D)
 	ar rcs $(BIN_D)$(NAME) $(OBJ)
 	printf "$(GREEN)$(NAME): success\n"
-	printf "\n---------------------$(CURSOR_ON)\n\n"
+	echo "---------------------\n"
 
 $(OBJ_D)%.o: %.c includes/libft.h Makefile | $(OBJ_D)
-	printf "$(CURSOR_OFF)$(BLUE)"
+	printf "$(BLUE)"
 	$(CC) $(CFLAGS) -c $< -o $@
 	printf "$(GRAY)compiling: $(BLUE)%-40s $(GRAY)[%d/%d]\n" "$<" "$$(find ./obj/ -maxdepth 1 -type f -name '*.o' | wc -l)" "$(words $(SRCS))"
 
