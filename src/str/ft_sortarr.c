@@ -24,6 +24,37 @@ static size_t	arrlen(void **arr)
 	return (i);
 }
 
+void	ft_swap(void **a, void **b)
+{
+	void	*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	ft_generic_sort(void **arr, size_t lenght, int(*f)(void*, void*))
+{
+	size_t	i;
+	int		diff;
+
+	diff = 1;
+	while (diff)
+	{
+		i = 0;
+		diff = 0;
+		while (i < (lenght - 1))
+		{
+			if (f(arr[i], arr[i + 1]) > 0)
+			{
+				ft_swap(&arr[i], &arr[i + 1]);
+				diff = 1;
+			}
+			i++;
+		}
+	}
+}
+
 void	ft_arrsort(char **arr)
 {
 	int		i;
