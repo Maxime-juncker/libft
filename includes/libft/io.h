@@ -42,12 +42,15 @@
 #  define BUFFER_SIZE 10
 # endif
 
+# define FT_LOG		0
+# define FT_DEBUG	1
+# define FT_WARNING	2
+# define FT_ERROR	3
+# define FT_ALERT	4
+
 // debug.c
-void	success(const char *msg);
-void	warning(const char *msg);
-void	error(const char *msg);
-void	alert(const char *msg);
-void	info(const char *msg);
+int		ft_debug(int level, const char *format, ...)
+		__attribute__((format(printf, 2, 3)));
 
 // put function
 int		ft_putnbr_base_fd(int fd, int n, const char *base);

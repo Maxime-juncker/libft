@@ -142,8 +142,9 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
+# need to have a main.c in src/
 debug: $(OBJ) | $(BIN_D)
-	$(CC) $(CFLAGS) $(OBJ) -o $(BIN_D)a.out
+	$(CC) $(CFLAGS) $(OBJ) ./src/main.c -o $(BIN_D)a.out
 	echo "$(GREEN)[SUCCESS]$(RESET)"
 
 run: debug
