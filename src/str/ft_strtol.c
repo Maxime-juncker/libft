@@ -29,7 +29,7 @@ static int	get_sign(const char *s, int *i)
 	return (sign);
 }
 
-static int	in_base(char c, char *base, int base_len)
+static int	in_base(char c, const char *base, int base_len)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ static int	in_base(char c, char *base, int base_len)
 
 long	ft_strtol(const char *nptr, char **endptr, int base)
 {
-	static char	b[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const char	b[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	long		n;
 	int			i;
 	int			sign;

@@ -18,7 +18,7 @@
 # define FREE1 0b0001
 # define FREE2 0b0010
 
-void	ft_generic_sort(void **arr, size_t lenght, int(*f)(void*, void*));
+void*	ft_generic_sort(void *arr, size_t lenght, size_t size, int(*f)(void*, void*));
 
 // string convertions
 int		ft_atoi(const char *nptr);

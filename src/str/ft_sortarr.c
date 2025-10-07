@@ -6,11 +6,12 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 08:40:52 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/03/05 11:58:00 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/10/06 10:20:16 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/string.h"
+#include "libft/memory.h"
 
 static size_t	arrlen(void **arr)
 {
@@ -24,16 +25,8 @@ static size_t	arrlen(void **arr)
 	return (i);
 }
 
-void	ft_swap(void **a, void **b)
-{
-	void	*tmp;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-void	ft_generic_sort(void **arr, size_t lenght, int(*f)(void*, void*))
+void*	ft_generic_sort(void *arr, size_t lenght, size_t size, int(*f)(void*, void*))
 {
 	size_t	i;
 	int		diff;
@@ -45,14 +38,15 @@ void	ft_generic_sort(void **arr, size_t lenght, int(*f)(void*, void*))
 		diff = 0;
 		while (i < (lenght - 1))
 		{
-			if (f(arr[i], arr[i + 1]) > 0)
+			if (f((arr + size * i), arr + size * (i + 1)) > 0)
 			{
-				ft_swap(&arr[i], &arr[i + 1]);
+				ft_swap(arr + size * i, arr + size * (i + 1));
 				diff = 1;
 			}
 			i++;
 		}
 	}
+	return arr;
 }
 
 void	ft_arrsort(char **arr)

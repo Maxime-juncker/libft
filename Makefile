@@ -6,7 +6,7 @@
 #    By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 18:00:56 by mjuncker          #+#    #+#              #
-#    Updated: 2025/10/01 15:37:46 by mjuncker         ###   ########.fr        #
+#    Updated: 2025/10/06 10:20:29 by mjuncker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRCS =  ft_isalpha.c 		\
 		ft_printf_utils.c	\
 		ft_printf_options.c	\
 		ft_strutils.c		\
+		ft_swap.c			\
 		# main.c				\
 
 OBJ = $(SRCS:.c=.o)
@@ -91,7 +92,7 @@ DEPS = $(OBJ:.o=.d)
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=20 -MP -MMD
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDES_D) -g3 -D BUFFER_SIZE=20 -MP -MMD -fPIC
 MAKEFLAGS += -s
 
 # commands
