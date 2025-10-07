@@ -31,13 +31,35 @@ static int	add_to_buffer(t_segment *seg, char *buffer,
 	i = 0;
 	while (i + ft_strlen(seg->buffer) < (size_t)ft_abs(seg->min_width))
 	{
-		buffer[buf_len + i] = ' ';
+		buffer[buf_len + i] = seg->c;
 		total_size++;
 		i++;
 	}
 	if (seg->side == 0)
 		ft_strlcat(buffer, seg->buffer, size);
 	return (total_size);
+}
+
+static void	set_align(char **str, t_segment *seg)
+{
+	if (**str == '-' || ft_isdigit(**str))
+	{
+		if (**str == '0' || (**str == '-' && *(*str + 1) == '0'))
+		{
+			*str += 1;
+			seg->c = '0';
+		}
+		else
+			seg->c = ' ';
+		seg->min_width = ft_atoi(*str);
+		if (seg->min_width < 0)
+		{
+			seg->side = 1;
+			*str += 1;
+		}
+		while (ft_isdigit(**str))
+			*str += 1;
+	}
 }
 
 static int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
@@ -48,17 +70,7 @@ static int	parse_arg(char **str, char *buffer, size_t size, va_list *ptr)
 	ft_bzero(&seg, sizeof(t_segment));
 	total_size = 0;
 	*str += 1;
-	if (**str == '-' || ft_isdigit(**str))
-	{
-		seg.min_width = ft_atoi(*str);
-		if (seg.min_width < 0)
-		{
-			seg.side = 1;
-			*str += 1;
-		}
-		while (ft_isdigit(**str))
-			*str += 1;
-	}
+	set_align(str, &seg);
 	total_size = add_option(&seg, str, ptr);
 	*str += 1;
 	return (add_to_buffer(&seg, buffer, size, total_size));

@@ -25,8 +25,8 @@ static size_t	arrlen(void **arr)
 	return (i);
 }
 
-
-void*	ft_generic_sort(void *arr, size_t lenght, size_t size, int(*f)(void*, void*))
+void	*ft_generic_sort(void *arr, size_t lenght, size_t size,
+			int (*f)(void*, void*))
 {
 	size_t	i;
 	int		diff;
@@ -46,7 +46,7 @@ void*	ft_generic_sort(void *arr, size_t lenght, size_t size, int(*f)(void*, void
 			i++;
 		}
 	}
-	return arr;
+	return (arr);
 }
 
 void	ft_arrsort(char **arr)
