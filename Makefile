@@ -18,7 +18,7 @@ SRCS_D		= src/
 BIN_D		= bin/
 INCLUDES_D	= includes/
 
-VPATH = src:src/str:src/mem:src/math:src/link_lst:src/is:src/io:src/io/ft_printf
+VPATH = src:src/str:src/mem:src/math:src/link_lst:src/is:src/io:src/io/ft_printf:src/tree
 
 # src file names
 SRCS =  ft_isalpha.c 		\
@@ -81,7 +81,9 @@ SRCS =  ft_isalpha.c 		\
 		ft_printf_options.c	\
 		ft_strutils.c		\
 		ft_swap.c			\
-		# main.c				\
+		ft_treeInsert.c		\
+		ft_treenew.c		\
+		ft_treeDFS.c		\
 
 OBJ = $(SRCS:.c=.o)
 
