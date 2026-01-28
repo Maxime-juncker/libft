@@ -34,11 +34,6 @@ to use io function you'll need to include ```libft/io.h```
 | function        | description                                         |
 | --------------- | ----------------------------------------------------|
 | malloc_assert   | test if a malloc has failded, if so, print an error |
-| alert           | print a msg a msg on stderr on a bright red background |
-| info            | print a log msg in gray                             |
-| warning         | print a warning msg in stderr |
-| error           | print a red msg in stderr |
-| success         | print a green msg |
 | ft_printf       | remake of the printf function (support %c, %s, %d, %x/X, %p, %%)
 | ft_dprintf      | same as printf but a fd in taken in args |
 | ft_putchar_fd   | print a char on the given fd |
@@ -95,6 +90,19 @@ to use io function you'll need to include ```libft/memory.h```
 | ft_memcpy       | copy a pointer src to a pointer dest (memory cannot overlap) |
 | ft_memmove      | copy a pointer src to a pointer dest (memory can overlap) |
 
+# vectors functions
+function use the vectors
+
+to use io function you'll need to include ```libft/vector.h```
+
+| function        | description                                         |
+| --------------- | ----------------------------------------------------|
+| newVec       | create new vector |
+| vec push | add new elt to end of vector |
+| vec pop | remove the last element of vector| 
+| vecGet| get element at index|
+| freeVec| free all ressources of vector|
+| printVec| print vector|
 
 # link list functions
 function use link list
