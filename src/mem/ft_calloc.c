@@ -28,3 +28,4 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ft_bzero(mem, nmemb * size);
 	return (mem);
 }
+

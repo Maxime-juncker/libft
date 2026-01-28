@@ -1,28 +1,38 @@
 #include "libft/tree.h"
+#include "libft/vector.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void step(const t_tree* tree)
 {
 	printf("%c, ", tree->value);
 }
 
+void clean(const t_tree* tree)
+{
+	free((void*)tree);
+}
+
 int main()
 {
-	t_tree* root = ft_treenew('f');
-	ft_insertLeft(root, 'b');
-	ft_insertLeft(root->left, 'a');
-	ft_insertRight(root->left, 'd');
-	ft_insertLeft(root->left->right, 'c');
-	ft_insertRight(root->left->right, 'e');
-	ft_insertRight(root, 'g');
-	ft_insertRight(root->right, 'i');
-	ft_insertLeft(root->right->right, 'h');
-	ft_printTree(root);
+	t_vector vec = newVec(2);
 
-	ft_DFS_preorder(root, &step);
-	printf("\n");
-	ft_DFS_postorder(root, step);
-	printf("\n");
-	ft_DFS_inorder(root, step);
+	printVec(&vec);
 
+	for (int i = 1; i < 15; i++)
+	{
+		vecPush(&vec, i);
+		printVec(&vec);
+	}
+	for (int i = 1; i < 15; i++)
+	{
+		printf("%d, ", vecPop(&vec));
+	}
+
+	freeVec(&vec);
+	printVec(&vec);
+
+	vecPush(&vec, 10);
+	printVec(&vec);
+	freeVec(&vec);
 }
