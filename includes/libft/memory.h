@@ -24,4 +24,6 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	ft_swap(void **a, void **b);
 
+void	ft_qsort(int* arr, size_t size);
+
 #endif

@@ -1,38 +1,30 @@
-#include "libft/tree.h"
-#include "libft/vector.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include "libft/args.h"
 
-void step(const t_tree* tree)
+int main(int argc, char** argv)
 {
-	printf("%c, ", tree->value);
-}
+	const t_arg args[] = {
+		(t_arg){ .argName = 'l', .argNameLong = "count", .hasArg = NO_ARG },
+		(t_arg){ .argName = 'a', .argNameLong = "count", .hasArg = NO_ARG },
+		(t_arg){ .argName = 0, .argNameLong = NULL, .hasArg = 0 }, // end option
+	};
 
-void clean(const t_tree* tree)
-{
-	free((void*)tree);
-}
-
-int main()
-{
-	t_vector vec = newVec(2);
-
-	printVec(&vec);
-
-	for (int i = 1; i < 15; i++)
+	int c;
+	while ((c = ft_getopt(args, argc, argv, NULL)) != -1)
 	{
-		vecPush(&vec, i);
-		printVec(&vec);
-	}
-	for (int i = 1; i < 15; i++)
-	{
-		printf("%d, ", vecPop(&vec));
-	}
+		switch (c)
+		{
+			case 'a':
+				printf("option a ok\n");
+				break;
+			case 'l':
+				printf("option b ok\n");
+				break;
+			default:
+				printf("default\n");
+				break;
+		
+		}
 
-	freeVec(&vec);
-	printVec(&vec);
-
-	vecPush(&vec, 10);
-	printVec(&vec);
-	freeVec(&vec);
+	}
 }

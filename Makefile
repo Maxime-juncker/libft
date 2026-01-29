@@ -87,6 +87,8 @@ SRCS =  ft_isalpha.c 		\
 		ft_treeDFS.c		\
 		ft_treeBST.c		\
 		vector.c			\
+		ft_quicksort.c		\
+		ft_args.c			\
 
 OBJ = $(SRCS:.c=.o)
 
