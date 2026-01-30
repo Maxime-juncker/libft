@@ -22,6 +22,6 @@ enum e_hasArg
 // int		registerArg(t_arg* args, t_arg newArg);
 // void	parseArgs(t_arg* args, int argc, char** argv);
 
-char	ft_getopt(const t_arg* args, int argc, char** argv, char* optarg);
+char	ft_getopt(const t_arg* args, int argc, char** argv, char** optarg);
 
 #endif // !ARGS_H
